@@ -13,8 +13,8 @@ var db = require('./models')
 
 
 // view engine setup - commented out for now
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -39,7 +39,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 
-  db.sequelize.sync({force: true});
+  // Placed this in bin/www so it would occur before listening on port
+  // db.sequelize.sync({force: false});
       
   
 });

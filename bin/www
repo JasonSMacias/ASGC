@@ -1,8 +1,10 @@
 #!/usr/bin/env node
-
 /**
  * Module dependencies.
  */
+// Placed this here so it would occur before
+var db = require("../models");
+db.sequelize.sync({force: false})
 
 var app = require('../app');
 var debug = require('debug')('asgc:server');
