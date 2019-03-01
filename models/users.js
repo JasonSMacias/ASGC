@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
         len: [1, 125]
       }
     },
-    userName: {
+    user_name: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -25,6 +25,13 @@ module.exports = function(sequelize, DataTypes) {
        type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        len: [1, 255]
+      }
+    },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: true,
       validate: {
         len: [1, 255]
       }
