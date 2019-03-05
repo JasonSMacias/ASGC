@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const passport = require("./utils/middleware/passport-local");
+const session = require("express-session");
 
 const routes = require('./routes');
 

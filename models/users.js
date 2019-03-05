@@ -1,5 +1,5 @@
-// for passport implementation
-// const bcryptjs = require("bcryptjs");
+for passport implementation
+const bcryptjs = require("bcryptjs");
 
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
