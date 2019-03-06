@@ -1,5 +1,5 @@
 // for passport implementation
-// const bcryptjs = require("bcryptjs");
+const bcryptjs = require("bcryptjs");
 
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
@@ -51,15 +51,15 @@ module.exports = function(sequelize, DataTypes) {
   //   })
   // };
 
-  //Next two sections for passport implementation
-  // create method for all user objects to usefor passport
-  // User.prototype.validPassword = function(password) {
-  //   return bcryptjs.compareSync(password, this.password);
-  // }
+  // Next two sections for passport implementation
+  // create method for all user objects to use for passport
+  User.prototype.validPassword = function(password) {
+    return bcryptjs.compareSync(password, this.password);
+  }
 
-  // User.hook("beforeCreate", function(user) {
-  //   user.password = bcryptjs.hashSync(user.password, bcryptjs.genSaltSync(10), null);
-  // });
+  User.hook("beforeCreate", function(user) {
+    user.password = bcryptjs.hashSync(user.password, bcryptjs.genSaltSync(10), null);
+  });
 
   return User;
 };

@@ -29,14 +29,14 @@ module.exports = {
         res.status(404).json(err);
       });
   },
-  // userCheck: function(req, res) {
-  //   if (req.user) {
-  //     return res.json(req.user);
-  //   }
-  //   else {
-  //     return res.status(422).json({error: "Not logged in!"})
-  //   }
-  // },
+  userCheck: function(req, res) {
+    if (req.user) {
+      return res.json(req.user);
+    }
+    else {
+      return res.status(422).json({error: "Not logged in!"})
+    }
+  },
   update: function (req, res) {
     db
       .User
@@ -68,11 +68,11 @@ module.exports = {
   register: function(req, res) {
     /* 
       req.body => {
-        name: "Alex",
-        userName: "Rosenkranz",
-        email: "alex@alex.com",
-        password: "123456",
-        address: "127 W. 8th st"
+        name: "",
+        userName: "",
+        email: "",
+        password: "",
+        address: ""
       }
     */
     db
@@ -80,18 +80,18 @@ module.exports = {
       .create(req.body)
       .then(function (userInfo) {
         // Upon successful signup, log user in
-        // req
-        //   .login(userInfo, function (err) {
-        //     if (err) {
-        //       console.log(err)
-        //       return res
-        //         .status(422)
-        //         .json(err);
-        //     }
+        req
+          .login(userInfo, function (err) {
+            if (err) {
+              console.log(err)
+              return res
+                .status(422)
+                .json(err);
+            }
           
             console.log(req.user);
             return res.json("/");
-        //   });
+          });
       })
       .catch(function (err) {
         console.log("Your password or email is not correct!"+err);
@@ -101,10 +101,10 @@ module.exports = {
           .json(err);
       });
   },
-  // login: function(req, res) {
-  //   console.log(req.user);
-  //   res.json("/");
-  // },
+  login: function(req, res) {
+    console.log(req.user);
+    res.json("/");
+  },
 
   findById: function(req, res){
      db
