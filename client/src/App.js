@@ -11,7 +11,7 @@ import './App.css';
 import Axios from 'axios';
 
 class App extends Component {
-  state = { users: []}
+  state = { isLoggedIn: false }
 
 // to get users: {this.state.users.map(user => <li key={user.id}>{user.user_name}, {user.address}</li>)}
 

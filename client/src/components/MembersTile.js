@@ -4,7 +4,7 @@ function MembersTile(props) {
   return (
     <section>
         <div className="box">
-          <h2>Members section</h2>
+          <h2 className="section-head has-text-centered"><span className="icon has-text-black-bis"><i class="fas fa-brain"></i></span> Members</h2> <hr />
           <p>This will have general info with a hamburger menu upper left</p>
           <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem minus ea possimus debitis maxime minima, consequatur fuga natus rem dignissimos adipisci quasi pariatur vero sint, dolore voluptate excepturi nostrum ducimus.</p>
         </div>
