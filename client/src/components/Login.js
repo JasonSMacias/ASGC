@@ -50,7 +50,7 @@ class Login extends Component {
             </div>
           </div>
         </Switch>
-        {/* <Switch></Switch> */}
+        
       </React.Fragment>
     );
   }

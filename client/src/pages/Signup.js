@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import API from '../utils/API';
+import Modal from '../components/Modal';
 
 class Signup extends Component {
   
@@ -11,6 +12,8 @@ class Signup extends Component {
     email: '',
     address: '',
     password: '',
+    active: 'modal',
+    modalContent: 'Sign up successful.  Log in to continue.',
   }
 
   handleInputChange = e => {
@@ -32,18 +35,32 @@ class Signup extends Component {
         })
       .then(res => {
         console.log(res.data);
-        this.setState({ success: res.data })
-
+        this.activateModal(res.data);
+        // this.setState({ success: res.data });
+        
       })
       .catch(err => console.log(err.response.data));
   }
 
+  close = () => {
+    this.setState({active: "modal", success: true});
+  };
+
+  activateModal = (res) => {
+    this.setState({
+      active: "modal is-active",
+      });
+  };
+
+
   render() {
     if (this.state.success) {
-      return <Redirect to ="/home" />
+      
+      return <Redirect to ="/" />
     }
 
     return (
+      <React.Fragment>
       <form className="field is-grouped-multiline box">
         <label className="label" htmlFor="username">Username</label>
         <div className="control">
@@ -108,6 +125,14 @@ class Signup extends Component {
           <button type="submit" className="button is-dark is-rounded" onClick={this.register} >Sign Up</button>
         </div>
       </form>
+      <Modal 
+      close={this.close} 
+      active={this.state.active} 
+      username={this.state.username}
+      // modalContent={this.state.modalContent} 
+      modalContent='Sign up successful.  Log in to continue.'
+      />
+      </React.Fragment>
     );
   }
 }
