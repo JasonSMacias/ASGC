@@ -8,8 +8,6 @@ import UserDashboard from './pages/UserDashboard';
 import Members from './pages/Members';
 import API from './utils/API';
 import Signup from './pages/Signup';
-
-import './App.css';
 import Axios from 'axios';
 
 class App extends Component {
