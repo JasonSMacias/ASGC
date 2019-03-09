@@ -12,8 +12,11 @@ class Signup extends Component {
     email: '',
     address: '',
     password: '',
+    confirmPassword: '',
     active: 'modal',
-    modalContent: 'Sign up successful.  Log in to continue.',
+    prefix: '',
+    asge: '',
+    modalContent: '',
   }
 
   handleInputChange = e => {
@@ -25,28 +28,43 @@ class Signup extends Component {
 
   register = (e) => {
     e.preventDefault();
-    API
-      .register({ 
-        username: this.state.username,
-        name: this.state.name,
-        email: this.state.email,
-        address: this.state.address,
-        password: this.state.password 
+    if (this.state.password == this.state.confirmPassword) {
+      API
+        .register({ 
+          username: this.state.username,
+          name: this.state.name,
+          email: this.state.email,
+          address: this.state.address,
+          password: this.state.password 
+          })
+        .then(res => {
+          console.log(res.data);
+          this.setState({
+            asgc: 'Abstract Strategy Gamers Club',
+            modalContent: 'Sign up successful.  Log in to continue.',
+            prefix: 'Welcome to the '
+          })
+          this.activateModal();
+          // this.setState({ success: res.data });
+          
         })
-      .then(res => {
-        console.log(res.data);
-        this.activateModal(res.data);
-        // this.setState({ success: res.data });
-        
+        .catch(err => console.log(err.response.data));
+    }
+    else {
+      this.setState({
+        modalContent: 'Passwords do not match.',
+        prefix: '',
+        asgc: ''
       })
-      .catch(err => console.log(err.response.data));
+      this.activateModal();
+    }
   }
 
   close = () => {
     this.setState({active: "modal", success: true});
   };
 
-  activateModal = (res) => {
+  activateModal = () => {
     this.setState({
       active: "modal is-active",
       });
@@ -121,6 +139,17 @@ class Signup extends Component {
           />
         </div>
         <br />
+        <label className="label" htmlFor="confirmPassword">Confirm Password  </label>
+        <div className="control is-medium">
+          <input
+            type="password"
+            name="confirmPassword"
+            onChange={this.handleInputChange}
+            className="input is-dark is-rounded"
+            placeholder="Password"
+          />
+        </div>
+        <br />
         <div className="control">
           <button type="submit" className="button is-dark is-rounded" onClick={this.register} >Sign Up</button>
         </div>
@@ -128,11 +157,11 @@ class Signup extends Component {
       <Modal 
       close={this.close} 
       active={this.state.active} 
-      prefix='Welcome to the '
-      asgc='Abstract Strategy Gamers Club'
+      prefix={this.state.prefix}
+      asgc={this.state.asgc}
       username={this.state.username}
-      // modalContent={this.state.modalContent} 
-      modalContent='Sign up successful.  Log in to continue.'
+      
+      modalContent={this.state.modalContent}
       />
       </React.Fragment>
     );
