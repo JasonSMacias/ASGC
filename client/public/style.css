@@ -8,3 +8,11 @@
   font-size: 20px;
 }
 
+.lnk {
+  color: maroon;
+}
+
+.lnk:hover {
+  color: black;
+  cursor: pointer;
+}

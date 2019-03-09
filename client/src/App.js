@@ -49,6 +49,7 @@ class App extends Component {
               <div className="container">
                 <Switch>
                   <Route exact path="/" component={Home} />
+                  
                   <Route exact path="/games" component={Games} />
                   <Route exact path="/game-sites" component={GamesSites} />
                   <Route exact path="/dashboard" component={UserDashboard} />

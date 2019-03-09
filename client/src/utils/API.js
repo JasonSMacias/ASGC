@@ -4,9 +4,9 @@ export default {
   /* 
     loginCreds = {username: "alex", "password": 12345Password!}
   */
-  // login: function(loginCreds) {
-  //   return axios.post('/api/users/login', loginCreds)
-  // },
+  login: function(loginCreds) {
+    return axios.post('/api/users/login', loginCreds)
+  },
   /* 
     Path to check if user is logged in
   */
