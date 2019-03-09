@@ -31,7 +31,7 @@ module.exports = {
   },
   userCheck: function(req, res) {
     if (req.user) {
-      return res.json(req.user);
+      return res.json(req.user.id);
     }
     else {
       return res.status(422).json({error: "Not logged in!"})

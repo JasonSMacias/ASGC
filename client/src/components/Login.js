@@ -10,6 +10,7 @@ class Login extends Component {
       password: "",
       email: "",
       active: "modal",
+      modalContent: '',
     }
 
   handleInputChange = e => {
@@ -32,7 +33,28 @@ class Login extends Component {
       })
       .catch(err => {
         console.log(err.response);
-        this.setState({active: 'modal is-active'})  
+        this.setState({
+          modalContent: 'Incorrect email or password.',
+          active: 'modal is-active'
+          })  
+      });
+  }
+
+  logout = (e) => {
+    e.preventDefault();
+    API
+      .logout()
+      .then(res => {
+        // this.setState({isLoggedIn: false});
+        this.setState({modalContent: "Logged out"});
+        this.setState({active: 'modal is-active'})
+      })
+      .then(res => {
+        this.setState({isLoggedIn: true});
+        this.setState({password: ""})
+      })
+      .catch(err => {
+        console.log(err.response);
       });
   }
 
@@ -111,7 +133,7 @@ class Login extends Component {
           prefix=''
           asgc=''
           // modalContent={this.state.modalContent} 
-          modalContent='Incorrect email or password.'
+          modalContent={this.state.modalContent}
           />
           </React.Fragment>
         :
@@ -125,7 +147,7 @@ class Login extends Component {
                 </div>
                 <br />
                 <div className="control">
-                  <button type="submit" className="button is-dark is-rounded" onClick={console.log("clicked")}>Logout</button>
+                  <button type="submit" className="button is-dark is-rounded" onClick={this.logout}>Logout</button>
                 </div>
               </section>
 

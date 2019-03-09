@@ -16,9 +16,9 @@ export default {
   /* 
     Path to log out
   */
-  // logout: function() {
-  //   return axios.get('/api/users/logout')
-  // },
+  logout: function() {
+    return axios.get('/api/users/logout')
+  },
   /* 
     Path to register new user, you can have more fields than this but "username" and "password" must exist
     userInfo = {
