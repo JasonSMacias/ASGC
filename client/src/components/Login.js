@@ -50,7 +50,7 @@ class Login extends Component {
         this.setState({active: 'modal is-active'})
       })
       .then(res => {
-        this.setState({isLoggedIn: true});
+        this.setState({isLoggedIn: false});
         this.setState({password: ""})
       })
       .catch(err => {
