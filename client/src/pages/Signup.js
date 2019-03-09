@@ -128,6 +128,8 @@ class Signup extends Component {
       <Modal 
       close={this.close} 
       active={this.state.active} 
+      prefix='Welcome to the '
+      asgc='Abstract Strategy Gamers Club'
       username={this.state.username}
       // modalContent={this.state.modalContent} 
       modalContent='Sign up successful.  Log in to continue.'

@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 import API from '../utils/API';
+import Modal from './Modal';
 
 class Login extends Component {
 
     state = {
       isLoggedIn: false,
       password: "",
-      email: ""
+      email: "",
+      active: "modal",
     }
 
   handleInputChange = e => {
@@ -28,7 +30,10 @@ class Login extends Component {
         this.setState({isLoggedIn: res.data})
 
       })
-      .catch(err => console.log(err.response));
+      .catch(err => {
+        console.log(err.response);
+        this.setState({active: 'modal is-active'})  
+      });
   }
 
   usercheck = () => {
@@ -36,9 +41,14 @@ class Login extends Component {
       .userCheck()
       .then(res => {
         // Start here ====================================================================
-        console.log("user check: "+ res.username);
+        // res is object that can be checked at 3001 api/users/status
+        console.log("user check: "+ res);
       })
 
+  }
+
+  close = () => {
+    this.setState({active: "modal", success: true});
   }
 
   render () {
@@ -52,6 +62,7 @@ class Login extends Component {
       <React.Fragment>
         {/* <p>Sign in stuff OR basic member information <br /> and link to dashboard</p>     */}
         {!this.state.isLoggedIn ?
+          <React.Fragment>
           <div className="level-right">
             <div className="level-item">
               <form className="field is-grouped-multiline box">
@@ -79,13 +90,30 @@ class Login extends Component {
                   />
                 </div>
                 <br />
-                <div className="control">
-                  <button type="submit" className="button is-dark is-rounded" onClick={this.login}>Login</button>
+                <div className="level">
+                  {/* <div className="control"> */}
+                    <div className="level-left">
+                      <button type="submit" className="button is-dark is-rounded" onClick={this.login}>Log in</button>
+                    </div>
+                    <div className="level-right">
+                      <Link to="/signup" className="button is-dark is-rounded">Sign up</Link>
+                    </div>
+                  {/* </div> */}
                 </div>
               </form>
 
             </div>
           </div>
+          <Modal 
+          close={this.close} 
+          active={this.state.active} 
+          username={this.state.username}
+          prefix=''
+          asgc=''
+          // modalContent={this.state.modalContent} 
+          modalContent='Incorrect email or password.'
+          />
+          </React.Fragment>
         :
           <div className="level-right">
             <div className="level-item">
