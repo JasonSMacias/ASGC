@@ -10,9 +10,9 @@ export default {
   /* 
     Path to check if user is logged in
   */
-  // userCheck: function() {
-  //   return axios.get('/api/users/status')
-  // },
+  userCheck: function() {
+    return axios.get('/api/users/status')
+  },
   /* 
     Path to log out
   */

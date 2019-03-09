@@ -31,10 +31,21 @@ class Login extends Component {
       .catch(err => console.log(err.response));
   }
 
+  usercheck = () => {
+    API
+      .userCheck()
+      .then(res => {
+        // Start here ====================================================================
+        console.log("user check: "+ res);
+      })
+
+  }
+
   render () {
     // If user is logged in, take them to main page
     if (this.state.isLoggedIn) {
       console.log("it worked");
+      this.usercheck();
       // return <Redirect to ="/dashboard" />
     }
     return (
