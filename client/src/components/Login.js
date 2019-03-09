@@ -10,7 +10,8 @@ class Login extends Component {
       password: "",
       email: "",
       active: "modal",
-      modalContent: '',
+      modalContent: "",
+      username: "",
     }
 
   handleInputChange = e => {
@@ -58,13 +59,14 @@ class Login extends Component {
       });
   }
 
-  usercheck = () => {
+  usercheck = function() {
     API
       .userCheck()
       .then(res => {
         // Start here ====================================================================
         // res is object that can be checked at 3001 api/users/status
-        console.log("user check: "+ res);
+        console.log("user check: "+ res.data.id + " " + res.data.username);
+        this.setState({username: res.data.username});
       })
 
   }
@@ -140,7 +142,7 @@ class Login extends Component {
           <div className="level-right">
             <div className="level-item">
               <section className="field is-grouped-multiline box">
-                <div>Logged in as {this.state.email}</div>
+                <div>Logged in as {this.state.username}</div>
                 <br />
                 <div>
                   test content
