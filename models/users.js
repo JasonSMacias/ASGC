@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
         len: [1, 125]
       }
     },
-    user_name: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -39,6 +39,10 @@ module.exports = function(sequelize, DataTypes) {
     password: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   });
 
