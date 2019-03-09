@@ -20,3 +20,8 @@
   color: black;
   cursor: pointer;
 }
+
+.pagehead {
+  color: navy;
+  font-size: 32px;
+}
