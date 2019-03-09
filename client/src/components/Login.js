@@ -36,7 +36,7 @@ class Login extends Component {
       .userCheck()
       .then(res => {
         // Start here ====================================================================
-        console.log("user check: "+ res);
+        console.log("user check: "+ res.username);
       })
 
   }
