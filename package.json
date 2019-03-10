@@ -17,6 +17,7 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
     "mysql2": "^1.6.5",
+    "node-geocoder": "^3.22.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "react-router-dom": "^4.3.1",

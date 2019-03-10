@@ -36,6 +36,10 @@ module.exports = function(sequelize, DataTypes) {
         len: [1, 255]
       }
     },
+    geocodeLocation: {
+      type: DataTypes.JSON,
+      allowNull: true,
+    },
     password: {
       type: DataTypes.STRING,
       allowNull: false

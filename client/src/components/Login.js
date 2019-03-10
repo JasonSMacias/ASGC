@@ -12,6 +12,7 @@ class Login extends Component {
       active: "modal",
       modalContent: "",
       username: "",
+      geocodeLocation: {},
     }
 
   handleInputChange = e => {
@@ -66,7 +67,10 @@ class Login extends Component {
         // Start here ====================================================================
         // res is object that can be checked at 3001 api/users/status
         console.log("user check: "+ res.data.id + " " + res.data.username);
-        this.setState({username: res.data.username});
+        this.setState({
+          username: res.data.username,
+          geocodeLocation: res.data.geocodeLocation,
+          });
       })
 
   }
@@ -145,7 +149,8 @@ class Login extends Component {
                 <div>Logged in as {this.state.username}</div>
                 <br />
                 <div>
-                  test content
+                  City: {this.state.geocodeLocation.city} <br />
+                  Latitude and Longitude: {this.state.geocodeLocation.latitude}, {this.state.geocodeLocation.longitude}
                 </div>
                 <br />
                 <div className="control">

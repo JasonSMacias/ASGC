@@ -41,7 +41,7 @@ class Signup extends Component {
           console.log(res.data);
           this.setState({
             asgc: 'Abstract Strategy Gamers Club',
-            modalContent: 'Sign up successful.  Log in to continue.',
+            modalContent: 'Sign up successful.',
             prefix: 'Welcome to the '
           })
           this.activateModal();

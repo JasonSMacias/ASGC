@@ -1,5 +1,15 @@
 const db = require('../models');
 
+const NodeGeocoder = require('node-geocoder');
+require('dotenv').config();
+
+var options = {
+  provider: 'mapquest',
+  apiKey: process.env.MAPQUEST_KEY,
+};
+
+var geocoder = NodeGeocoder(options);
+
 module.exports = {
   findAll: function(req, res) {
     db
@@ -33,7 +43,9 @@ module.exports = {
     if (req.user) {
       return res.json({
         id: req.user.id, 
-        username: req.user.username
+        username: req.user.username,
+        address: req.user.address,
+        geocodeLocation: req.user.geocodeLocation
       });
     }
     else {
@@ -53,7 +65,36 @@ module.exports = {
         console.log(err);
         res.status(500).json(err);
       });
+  },  
+
+  addAddress: function (req, res) {
+    console.log(req.body);
+    geocoder.geocode(req.body)
+      .then(function(res) {
+        console.log(res);
+        let newJson = {geocodeLocation: res[0]}
+        console.log(newJson);
+        db
+          .User
+          .update(newJson, {
+            where: {
+              id: req.params.id
+            }
+          })
+          .then(dbUsers => dbUsers)
+          .catch(err => {
+            console.log(err);
+            // res.status(500).json(err);
+          });
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    
+    res.end;
+    
   },
+
   delete: function (req, res) {
     db
       .User
