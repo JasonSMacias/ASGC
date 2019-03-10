@@ -1,4 +1,5 @@
 const db = require('../models');
+const convertAddress = require('../utils/convertAddress');
 
 module.exports = {
   findAll: function(req, res) {
@@ -33,7 +34,8 @@ module.exports = {
     if (req.user) {
       return res.json({
         id: req.user.id, 
-        username: req.user.username
+        username: req.user.username,
+        address: req.user.address
       });
     }
     else {
@@ -53,7 +55,27 @@ module.exports = {
         console.log(err);
         res.status(500).json(err);
       });
+  },  
+
+  addAddress: function (req, res) {
+    let convertedAddress = convertAddress(req.body);
+    // This needs to be postponed, 
+    setTimeout(function(){ console.log("from controller "+convertedAddress)}, 10000);
+
+    // db
+    //   .User
+    //   .update(req.body, {
+    //     where: {
+    //       username: req.params.id
+    //     }
+    //   })
+    //   .then(dbUsers => res.json(dbUsers))
+    //   .catch(err => {
+    //     console.log(err);
+    //     res.status(500).json(err);
+    //   });
   },
+
   delete: function (req, res) {
     db
       .User

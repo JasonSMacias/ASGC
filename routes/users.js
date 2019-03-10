@@ -35,4 +35,8 @@ router
   .get(userController.findById)
   .put(userController.updateById);
 
+router
+  .route('/geo/:id')
+  .put(userController.addAddress);
+
 module.exports = router;
