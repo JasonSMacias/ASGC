@@ -1,5 +1,14 @@
 const db = require('../models');
-const convertAddress = require('../utils/convertAddress');
+
+const NodeGeocoder = require('node-geocoder');
+require('dotenv').config();
+
+var options = {
+  provider: 'mapquest',
+  apiKey: process.env.MAPQUEST_KEY,
+};
+
+var geocoder = NodeGeocoder(options);
 
 module.exports = {
   findAll: function(req, res) {
@@ -58,22 +67,31 @@ module.exports = {
   },  
 
   addAddress: function (req, res) {
-    let convertedAddress = convertAddress(req.body);
-    // This needs to be postponed, 
-    setTimeout(function(){ console.log("from controller "+convertedAddress)}, 10000);
-
-    // db
-    //   .User
-    //   .update(req.body, {
-    //     where: {
-    //       username: req.params.id
-    //     }
-    //   })
-    //   .then(dbUsers => res.json(dbUsers))
-    //   .catch(err => {
-    //     console.log(err);
-    //     res.status(500).json(err);
-    //   });
+    console.log(req.body);
+    geocoder.geocode(req.body)
+      .then(function(res) {
+        console.log(res);
+        let newJson = {geocodeLocation: res[0]}
+        console.log(newJson);
+        db
+          .User
+          .update(newJson, {
+            where: {
+              username: req.params.id
+            }
+          })
+          .then(dbUsers => res.json(dbUsers))
+          .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+          });
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    
+    
+    
   },
 
   delete: function (req, res) {
