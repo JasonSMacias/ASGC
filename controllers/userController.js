@@ -44,7 +44,8 @@ module.exports = {
       return res.json({
         id: req.user.id, 
         username: req.user.username,
-        address: req.user.address
+        address: req.user.address,
+        geocodeLocation: req.user.geocodeLocation
       });
     }
     else {
@@ -77,20 +78,20 @@ module.exports = {
           .User
           .update(newJson, {
             where: {
-              username: req.params.id
+              id: req.params.id
             }
           })
-          .then(dbUsers => res.json(dbUsers))
+          .then(dbUsers => dbUsers)
           .catch(err => {
             console.log(err);
-            res.status(500).json(err);
+            // res.status(500).json(err);
           });
       })
       .catch(function(err) {
         console.log(err);
       });
     
-    
+    res.end;
     
   },
 
