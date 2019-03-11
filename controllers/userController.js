@@ -147,7 +147,7 @@ module.exports = {
   },
   login: function(req, res) {
     console.log(req.user);
-    res.json("/");
+    res.json(true);
   },
 
   findById: function(req, res){
