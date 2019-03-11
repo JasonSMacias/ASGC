@@ -15,14 +15,18 @@ var db = require('./models')
 
 
 // view engine setup - commented out for now
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 // app.use(express.static('public'));
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 // turn on session and passport stuff for authentication
 app.use(session({secret: "keyboard cat", resave: true, saveUninitialized: true}));
