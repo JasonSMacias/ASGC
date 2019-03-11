@@ -9,6 +9,7 @@ const session = require("express-session");
 const routes = require('./routes');
 
 const app = express();
+const PORT = process.env.PORT || 3001;
 
 // requiring models
 var db = require('./models')
@@ -56,4 +57,6 @@ app.use(function(err, req, res, next) {
   
 });
 
-module.exports = app;
+db.sequelize.sync({force: false}).then(function() {
+  app.listen(PORT, () => console.log("server up and running"));
+});
