@@ -6,10 +6,10 @@
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node app.js",
-    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-    "client": "cd client && npm run start",
-    "install": "cd client && npm install",
-    "build": "cd client && npm run build",
+    "start:dev": "concurrently \"nodemon --ignore 'react-ui/*'\" \"npm run react-ui\"",
+    "client": "cd react-ui && npm run start",
+    "install": "cd react-ui && npm install",
+    "build": "cd react-ui && npm run build",
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
