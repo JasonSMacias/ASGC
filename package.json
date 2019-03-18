@@ -11,7 +11,7 @@
     "react-ui": "cd react-ui && npm run start",
     "install": "cd react-ui && npm install",
     "build": "cd react-ui && npm run build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "cd react-ui/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
     "axios": "^0.18.0",
