@@ -6,7 +6,7 @@ const path = require('path');
 router.use("/api/users", usersRoute);
 
 router.use(function(req, res) {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"))
+  res.sendFile(path.join(__dirname, "../react-ui/build/index.html"))
 });
 
 module.exports = router;
